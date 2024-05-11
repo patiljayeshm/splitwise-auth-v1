@@ -1,0 +1,3 @@
+rootProject.name = 'Split-Share'
+include 'Sign-Up'
+
