@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -46,8 +48,13 @@ public class AuthenticationService {
         );
         var user  = userRepository.findByUsername(authenticationRequest.getUsername()).orElseThrow(()-> new UsernameNotFoundException("UserNotFound."));
         var jwtToken =jwtService.generateToken(user);
+        var expiry = jwtService.extractExpiration(jwtToken);
         return AuthenticationResponse.builder()
-                .token(jwtToken).build();
+                .token(jwtToken)
+                .username(authenticationRequest.getUsername())
+                .validTill(expiry)
+                .build();
+
     }
 
 }
