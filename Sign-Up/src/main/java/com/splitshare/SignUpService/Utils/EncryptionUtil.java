@@ -16,7 +16,7 @@ public class EncryptionUtil {
 
     private static   final String ALGORITHM = "AES/CBC/PKCS5Padding";
     private static final String  SECRET_KEY = "52A68CD5529FD7345AC44DD96918F";
-    private static final String SALT ="XDAWEERRDFAWD";
+    private static final String SALT ="aB5cD7eF9gI2jK4mN6";
     private static final int KEY_LENGTH = 256;
     private static final int ITERATION_COUNT = 65536;
 
