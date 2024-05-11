@@ -4,8 +4,8 @@ import jakarta.persistence.Enumerated;
 
 
 public enum Gender {
-    MALE("Male"),
-    FEMALE("Female"),
+    MALE("MALE"),
+    FEMALE("FEMALE"),
     OTHERS("OTHERS");
 
 

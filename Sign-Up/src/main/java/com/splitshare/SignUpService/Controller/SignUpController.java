@@ -1,15 +1,13 @@
 package com.splitshare.SignUpService.Controller;
 
 
+import com.splitshare.SignUpService.Model.LogInModelUser;
 import com.splitshare.SignUpService.Model.UserModel;
 import com.splitshare.SignUpService.Services.imp.SignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,8 +16,13 @@ public class SignUpController {
     private final SignUpService signUpService;
 
     @PostMapping("/signup")
-    public ResponseEntity<HttpStatus> signUp(@RequestBody UserModel userModel){
+    public ResponseEntity<HttpStatus> signUp(@RequestBody UserModel userModel)throws Exception{
         signUpService.SignUpUser(userModel);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> isLogIn(@RequestBody LogInModelUser userDetails)throws Exception{
+        return signUpService.isLogIn(userDetails);
     }
 }
