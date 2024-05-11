@@ -2,10 +2,7 @@ package com.splitshare.SignUpService.Model;
 
 import com.splitshare.SignUpService.Enum.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "t_users")
 @Entity
+@Builder
 public class UserModel implements UserDetails {
 
     @Id

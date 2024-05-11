@@ -16,6 +16,7 @@ import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,8 +43,8 @@ public class SignUpServiceImpl implements SignUpService {
     public ResponseEntity<Boolean> isLogIn(LogInModelUser userDetails) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         boolean isLogInFlag = false;
         if (null!=userDetails){
-            UserModel user = userRepository.findByUsername(userDetails.getUsername());
-            String userPasswordEncoded = encryptionUtil.decrypt(user.getPassword());
+            Optional<UserModel> user = userRepository.findByUsername(userDetails.getUsername());
+            String userPasswordEncoded = encryptionUtil.decrypt(user.get().getPassword());
             if (passwordEncoder.matches(userDetails.getPassword(),userPasswordEncoded)){
                 isLogInFlag= true;
             }

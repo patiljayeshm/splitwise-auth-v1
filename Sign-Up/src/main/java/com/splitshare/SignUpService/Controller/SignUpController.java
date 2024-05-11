@@ -1,28 +1,29 @@
 package com.splitshare.SignUpService.Controller;
 
 
-import com.splitshare.SignUpService.Model.LogInModelUser;
-import com.splitshare.SignUpService.Model.UserModel;
+import com.splitshare.SignUpService.Model.AuthenticationResponse;
+import com.splitshare.SignUpService.Model.AuthenticationRequest;
+import com.splitshare.SignUpService.Model.RegisterRequest;
+import com.splitshare.SignUpService.Services.imp.AuthenticationService;
 import com.splitshare.SignUpService.Services.imp.SignUpService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/auth")
 public class SignUpController {
     private final SignUpService signUpService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/signup")
-    public ResponseEntity<HttpStatus> signUp(@RequestBody UserModel userModel)throws Exception{
-        signUpService.SignUpUser(userModel);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<AuthenticationResponse> signUp(@RequestBody RegisterRequest registerRequest)throws Exception{
+        return ResponseEntity.ok(authenticationService.register(registerRequest));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Boolean> isLogIn(@RequestBody LogInModelUser userDetails)throws Exception{
-        return signUpService.isLogIn(userDetails);
+    public ResponseEntity<AuthenticationResponse> signUp(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
+        return ResponseEntity.ok(authenticationService.authenticate(authenticationRequest));
     }
 }
