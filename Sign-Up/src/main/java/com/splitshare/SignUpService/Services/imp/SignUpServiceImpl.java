@@ -1,6 +1,6 @@
 package com.splitshare.SignUpService.Services.imp;
 
-import com.splitshare.SignUpService.DTO.UserModel;
+import com.splitshare.SignUpService.Model.UserModel;
 import com.splitshare.SignUpService.Repository.SignUpRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
