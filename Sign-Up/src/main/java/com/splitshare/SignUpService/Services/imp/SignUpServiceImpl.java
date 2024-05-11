@@ -2,7 +2,7 @@ package com.splitshare.SignUpService.Services.imp;
 
 import com.splitshare.SignUpService.Model.LogInModelUser;
 import com.splitshare.SignUpService.Model.UserModel;
-import com.splitshare.SignUpService.Repository.SignUpRepo;
+import com.splitshare.SignUpService.Repository.UserRepository;
 import com.splitshare.SignUpService.Utils.EncryptionUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
 @Slf4j
 public class SignUpServiceImpl implements SignUpService {
 
-    private final SignUpRepo signUpRepo;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final EncryptionUtil encryptionUtil;
 
@@ -31,7 +31,7 @@ public class SignUpServiceImpl implements SignUpService {
     public void SignUpUser(UserModel userModel) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         try {
             userModel.setPassword(encryptionUtil.encrypt(passwordEncoder.encode(userModel.getPassword())));
-            signUpRepo.save(userModel);
+            userRepository.save(userModel);
         }catch (Exception e){
             log.info(e.toString());
         }
@@ -42,7 +42,7 @@ public class SignUpServiceImpl implements SignUpService {
     public ResponseEntity<Boolean> isLogIn(LogInModelUser userDetails) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         boolean isLogInFlag = false;
         if (null!=userDetails){
-            UserModel user = signUpRepo.findByUsername(userDetails.getUsername());
+            UserModel user = userRepository.findByUsername(userDetails.getUsername());
             String userPasswordEncoded = encryptionUtil.decrypt(user.getPassword());
             if (passwordEncoder.matches(userDetails.getPassword(),userPasswordEncoded)){
                 isLogInFlag= true;
