@@ -12,12 +12,11 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_users")
 @Entity
-public class UserModel {
+public class UserModel implements  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
