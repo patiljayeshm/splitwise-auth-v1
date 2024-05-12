@@ -5,12 +5,9 @@ import com.splitshare.SignUpService.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -23,12 +20,12 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         var user = UserModel.builder()
-                .username(registerRequest.getUsername())
+                .username(registerRequest.getUsername().trim().toLowerCase())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.USER)
-                .lastName(registerRequest.getLastName())
-                .firstName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName().trim())
+                .firstName(registerRequest.getFirstName().trim())
                 .gender(registerRequest.getGender())
                 .dateOfBirth(registerRequest.getDateOfBirth())
                 .build();

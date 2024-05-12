@@ -28,14 +28,15 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     //devTools
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-task', version: '3.1.1'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
     //tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
 }
+
 
 test {
     useJUnitPlatform()
 }
+
