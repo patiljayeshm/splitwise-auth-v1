@@ -27,6 +27,9 @@ dependencies {
     //lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+   //crypts
+    implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.3'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.68'
     //devTools
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-task', version: '3.1.1'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
